@@ -105,4 +105,8 @@ if [[ "$*" == "/bin/bash /app/start.sh" ]]; then
     check_dh_group
 fi
 
+if [ "${INCLUDE_STOPPED_CONTAINERS}" == "true" ]; then
+    export INCLUDE_STOPPED=" -include-stopped"
+fi
+
 exec "$@"
