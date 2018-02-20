@@ -123,7 +123,7 @@ reload_nginx() {
         if [[ -n "${_nginx_proxy_container:-}" ]]; then
             echo "Reloading nginx proxy (${_nginx_proxy_container})..."
             docker_exec "${_nginx_proxy_container}" \
-                        '[ "sh", "-c", "/usr/local/bin/docker-gen /app/nginx.tmpl /etc/nginx/conf.d/default.conf; /usr/sbin/nginx -s reload" ]'
+                        "[ \"bash\", \"-c\", \"/usr/local/bin/docker-gen${INCLUDE_STOPPED} /app/nginx.tmpl /etc/nginx/conf.d/default.conf; /usr/sbin/nginx -s reload\" ]"
             [[ $? -eq 1 ]] && echo "$(date "+%Y/%m/%d %T"), Error: can't reload nginx-proxy." >&2
         fi
     fi
